@@ -462,6 +462,10 @@ export default class ImageViewer extends React.Component<Props, State> {
         height *= HeightPixel;
       }
 
+      if (image.props.type === 'video') {
+        return (this!.props!.renderVideo!(image.props))
+      }
+
       const Wrapper = ({ children, ...others }: any) => (
         <ImageZoom
           cropWidth={this.width}

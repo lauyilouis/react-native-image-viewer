@@ -152,11 +152,15 @@ export class Props {
     );
   };
 
+  public renderVideo?: (props: any) => React.ReactElement<any> = (props: any) => {
+    return null as any;
+  };
+
   /**
    * Render image component
    */
   public renderImage?: (props: any) => React.ReactElement<any> = (props: any) => {
-    return React.createElement(Image, props);
+    return null as any;
   };
 
   /**
