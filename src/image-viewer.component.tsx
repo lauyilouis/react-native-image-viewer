@@ -462,10 +462,6 @@ export default class ImageViewer extends React.Component<Props, State> {
         height *= HeightPixel;
       }
 
-      if (image.props.type === 'video') {
-        return (this!.props!.renderVideo!(image.props))
-      }
-
       const Wrapper = ({ children, ...others }: any) => (
         <ImageZoom
           cropWidth={this.width}
@@ -488,6 +484,25 @@ export default class ImageViewer extends React.Component<Props, State> {
           {children}
         </ImageZoom>
       );
+
+      if (image.props.type === 'video') {
+        return (
+          <Wrapper
+            key={index}
+            style={{
+              ...this.styles.modalContainer,
+              ...this.styles.loadingContainer
+            }}
+            imageWidth={screenWidth}
+            imageHeight={screenHeight}
+            pinchToZoom={false}
+            enableDoubleClickZoom={false}
+          >
+            <View style={this.styles.loadingContainer}>{this!.props!.loadingRender!()}</View>
+            {this!.props!.renderVideo!(image.props)}
+          </Wrapper>
+        )
+      }
 
       switch (imageInfo.status) {
         case 'loading':
